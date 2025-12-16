@@ -1,0 +1,23 @@
+class Solution {
+public:
+
+    int solveusingmem(vector<int>& nums,int n,int index,vector<int>& dp){
+        if(index >= n){
+            return 0;
+        }
+        if(dp[index] != -1){
+            return dp[index];
+        }
+        int a = nums[index] + solveusingmem(nums,n,index+2,dp);
+        int b = 0 +solveusingmem(nums,n,index+1,dp);
+        dp[index] = max(a,b);
+        return dp[index];
+    }
+    int rob(vector<int>& nums) {
+        int n=nums.size();
+        int index=0;
+        vector<int> dp(n+1,-1);
+        int maxi = solveusingmem(nums,n,index,dp);
+        return maxi;
+    }
+};
